@@ -34,12 +34,12 @@ namespace MyPlaywright
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
 
-            // ép DI tạo Singleton sớm
-            using (var scope = app.Services.CreateScope())
-            {
-                var playwrightService = scope.ServiceProvider.GetRequiredService<IPlaywrightService>();
-                // nếu PlaywrightService có constructor hoặc logic khởi tạo — nó sẽ chạy ngay tại đây
-            }
+            //// ép DI tạo Singleton sớm
+            //using (var scope = app.Services.CreateScope())
+            //{
+            //    var playwrightService = scope.ServiceProvider.GetRequiredService<IPlaywrightService>();
+            //    // nếu PlaywrightService có constructor hoặc logic khởi tạo — nó sẽ chạy ngay tại đây
+            //}
 
             app.Run();
         }

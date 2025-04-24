@@ -1,4 +1,4 @@
-using MyPlaywright.Services;
+﻿using MyPlaywright.Services;
 
 namespace MyPlaywright
 {
@@ -11,7 +11,7 @@ namespace MyPlaywright
             // Add services to the container.
             builder.Services.AddControllersWithViews();
             builder.Services.AddSingleton<IPlaywrightService, PlaywrightService>();
-            builder.Services.AddHostedService<PlaywrightInitializer>();
+            //builder.Services.AddHostedService<PlaywrightInitializer>();
 
             var app = builder.Build();
 
@@ -33,6 +33,13 @@ namespace MyPlaywright
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
+
+            // ép DI tạo Singleton sớm
+            using (var scope = app.Services.CreateScope())
+            {
+                var playwrightService = scope.ServiceProvider.GetRequiredService<IPlaywrightService>();
+                // nếu PlaywrightService có constructor hoặc logic khởi tạo — nó sẽ chạy ngay tại đây
+            }
 
             app.Run();
         }
